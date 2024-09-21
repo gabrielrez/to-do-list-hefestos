@@ -23,9 +23,10 @@ class UsuariosController extends Controller
                 ->com('feedback', 'Preencha todos os campos obrigatórios.');
         }
 
-        $usuario_existe = $this->usuario->buscar($usuario['email'], 'email');
+        $usuario_existe = $this->usuario->primeiroOnde(['email' => $usuario['email']], 'email');
 
         if (!$usuario_existe) {
+            $usuario['senha'] = password_hash($usuario['senha'], PASSWORD_DEFAULT);
             $this->usuario->insert($usuario);
 
             // Criar session
@@ -45,7 +46,7 @@ class UsuariosController extends Controller
                 ->com('feedback', 'Preencha todos os campos obrigatórios.');
         }
 
-        $usuario_existe = $this->usuario->buscar($usuario['email'], 'email');
+        $usuario_existe = $this->usuario->primeiroOnde(['email' => $usuario['email']], 'email');
 
         if ($usuario_existe && password_verify($usuario['senha'], $usuario_existe['senha'])) {
             // Criar session
@@ -58,7 +59,7 @@ class UsuariosController extends Controller
 
     public function logout()
     {
-        // Encerrar a session
+        session_destroy();
         return redirecionar('/register');
     }
 }

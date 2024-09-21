@@ -9,6 +9,7 @@ class FiltroUsuarioLogado
      */
     public function aplicar()
     {
+        // Lógica para checar se o usuário está logado
         $usuario_logado = true;
 
         if (!$usuario_logado) {

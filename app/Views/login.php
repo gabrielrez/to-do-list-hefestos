@@ -7,8 +7,8 @@
     <input type="email" name="email" required id="email_input" placeholder="email@email.com">
   </div>
   <div class="input-box">
-    <label for="password">Senha</label>
-    <input type="password" name="password" required id="password_input" placeholder="********">
+    <label for="senha">Senha</label>
+    <input type="password" name="senha" required id="senha_input" placeholder="********">
   </div>
   <button class="login-btn">Fazer Login</button>
   <a href="/register" class="link-register">Criar Conta</a>
