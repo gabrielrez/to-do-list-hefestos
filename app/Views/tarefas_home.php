@@ -2,12 +2,14 @@
 
 <div class="container">
   <div class="header">
-    <h1 class="title">Lista de Tarefas</h1>
+    <h1 class="title">Lista de Tarefas <span class="usuario_nome">de <?= $usuario['nome'] ?></span></h1>
     <form action="/logout" method="POST">
       <button>Sair da Conta</button>
     </form>
   </div>
-  <?= comp('form') ?>
+  <?= comp('form', [
+    'usuario_id' => $usuario['id']
+  ]) ?>
   <ul class="task-list">
     <?php foreach ($tarefas as $tarefa): ?>
       <li class="task-item">
@@ -92,6 +94,11 @@
     font-size: 2rem;
     margin-bottom: 32px;
     color: #25221E;
+  }
+
+  .usuario_nome {
+    font-size: 1rem;
+    color: #6F6C6A;
   }
 
   .add-form {

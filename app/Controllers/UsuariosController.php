@@ -29,7 +29,12 @@ class UsuariosController extends Controller
             $usuario['senha'] = password_hash($usuario['senha'], PASSWORD_DEFAULT);
             $this->usuario->insert($usuario);
 
-            // Criar session
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            $_SESSION['usuario_id'] = $this->usuario->idInserido();
+            $_SESSION['usuario_email'] = $usuario['email'];
+
             return redirecionar('/tarefas');
         }
 
@@ -49,7 +54,13 @@ class UsuariosController extends Controller
         $usuario_existe = $this->usuario->primeiroOnde(['email' => $usuario['email']], 'email');
 
         if ($usuario_existe && password_verify($usuario['senha'], $usuario_existe['senha'])) {
-            // Criar session
+
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            $_SESSION['usuario_id'] = $usuario_existe['id'];
+            $_SESSION['usuario_email'] = $usuario_existe['email'];
+
             return redirecionar('/tarefas');
         }
 
@@ -60,6 +71,6 @@ class UsuariosController extends Controller
     public function logout()
     {
         session_destroy();
-        return redirecionar('/register');
+        return redirecionar('/login');
     }
 }

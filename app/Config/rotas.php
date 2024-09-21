@@ -16,7 +16,7 @@ $rotas->get('/login', function () {
 });
 
 $rotas->post('/login', [UsuariosController::class, 'login']);
-$rotas->post('/logout', [UsuariosController::class, 'logout']);
+$rotas->post('/logout', [UsuariosController::class, 'logout'])->filtro('logado');
 $rotas->post('/register', [UsuariosController::class, 'criarConta']);
 
 $rotas->get('/', [TarefasController::class, 'index'])->filtro('logado');

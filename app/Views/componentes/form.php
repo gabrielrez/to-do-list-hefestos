@@ -7,5 +7,6 @@
     <label for="descricao">Descrição</label>
     <input type="text" name="descricao" placeholder="Descrição da tarefa" id="descricao" required>
   </div>
+  <input type="hidden" name="usuario_id" value="<?= $usuario_id ?>">
   <button class="add-button" type="submit">Criar</button>
 </form>

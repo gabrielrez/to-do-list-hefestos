@@ -9,12 +9,15 @@ class FiltroUsuarioLogado
      */
     public function aplicar()
     {
-        // Lógica para checar se o usuário está logado
-        $usuario_logado = true;
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $usuario_logado = isset($_SESSION['usuario_id']);
 
         if (!$usuario_logado) {
-            redirecionar('/login')
-                ->com('feedback', 'Você precisa estar logado para acessar as tarefas');
+            return redirecionar('/login')
+                ->com('feedback', 'Você precisa estar logado para acessar essa página.');
         }
     }
 }
