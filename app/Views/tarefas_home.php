@@ -30,15 +30,28 @@
 <?= comp('footer') ?>
 
 <script>
-  document.querySelectorAll('.delete-button').forEach(button => {
-    button.addEventListener('click', function() {
-      const form = this.closest('form');
-      if (confirm('Tem certeza que deseja deletar esta tarefa?')) {
-        form.submit();
-      }
+  document.addEventListener('DOMContentLoaded', function() {
+    const taskItems = document.querySelectorAll('.task-item');
+    const container = document.querySelector('.container');
+
+    container.style.animation = 'show-up 0.5s forwards';
+
+    taskItems.forEach((item, index) => {
+      item.style.animation = `slide-in 0.5s forwards`;
+      item.style.animationDelay = `${index * 0.1}s`;
+    });
+
+    document.querySelectorAll('.delete-button').forEach(button => {
+      button.addEventListener('click', function() {
+        const form = this.closest('form');
+        if (confirm('Tem certeza que deseja deletar esta tarefa?')) {
+          form.submit();
+        }
+      });
     });
   });
 </script>
+
 
 <style>
   * {
@@ -88,6 +101,7 @@
     background-color: #FEFDFC;
     border: 1px solid #D7D5D4;
     border-radius: 16px;
+    opacity: 0;
   }
 
   .title {
@@ -158,6 +172,8 @@
     padding: 16px;
     border: 1px solid #D7D5D4;
     transition: 0.3s ease-in-out;
+    opacity: 0;
+    transform: translateX(-100%);
   }
 
   .task-item:hover {
@@ -186,5 +202,29 @@
 
   .delete-button:hover {
     scale: 0.95;
+  }
+
+  @keyframes show-up {
+    from {
+      opacity: 0;
+      transform: translateY(80px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 </style>

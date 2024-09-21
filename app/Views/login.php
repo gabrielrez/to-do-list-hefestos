@@ -14,6 +14,12 @@
   <a href="/register" class="link-register">Criar Conta</a>
 </form>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.container').style.animation = 'show-up 0.5s forwards';
+  })
+</script>
+
 <style>
   * {
     margin: 0;
@@ -40,6 +46,7 @@
     background-color: #FEFDFC;
     border: 1px solid #D7D5D4;
     border-radius: 16px;
+    opacity: 0;
   }
 
   form input {
@@ -85,5 +92,17 @@
     font-size: 1rem;
     text-align: center;
     color: #25221E;
+  }
+
+  @keyframes show-up {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>
