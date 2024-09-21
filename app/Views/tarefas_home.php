@@ -1,10 +1,15 @@
 <?= comp('header') ?>
 
 <div class="container">
-  <h1 class="title">Lista de Tarefas</h1>
+  <div class="header">
+    <h1 class="title">Lista de Tarefas</h1>
+    <form action="/logout" method="POST">
+      <button>Sair da Conta</button>
+    </form>
+  </div>
   <?= comp('form') ?>
   <ul class="task-list">
-    <?php foreach($tarefas as $tarefa): ?>
+    <?php foreach ($tarefas as $tarefa): ?>
       <li class="task-item">
         <form class="task-form" action="/tarefas/<?= $tarefa['id'] ?>" method="POST">
           <?= form_metodo_http('delete') ?>
@@ -34,7 +39,13 @@
 </script>
 
 <style>
-  body{
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -46,13 +57,26 @@
     font-family: 'Poppins';
   }
 
-  button{
+  button {
     border: none;
     color: #FEFDFC;
     padding: 10px 15px;
     border-radius: 16px;
     cursor: pointer;
     transition: 0.3s ease;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header button {
+    background-color: transparent;
+    color: #25221E;
+    font-size: 1rem;
+    text-decoration: underline;
   }
 
   .container {
@@ -70,20 +94,20 @@
     color: #25221E;
   }
 
-  .add-form{
+  .add-form {
     display: flex;
     align-items: end;
     gap: 16px;
     z-index: 2;
   }
 
-  .task-form{
+  .task-form {
     width: 100%;
     display: flex;
     justify-content: space-between;
   }
 
-  form input{
+  form input {
     padding: 12px;
     border-radius: 16px;
     background-color: #F2EFED;
@@ -91,7 +115,7 @@
     border: none;
   }
 
-  label{
+  label {
     display: block;
     margin-bottom: 8px;
   }
@@ -104,7 +128,7 @@
     transition: 0.2s ease-in-out;
   }
 
-  .add-button:hover{
+  .add-button:hover {
     scale: 0.95;
   }
 
@@ -129,7 +153,7 @@
     transition: 0.3s ease-in-out;
   }
 
-  .task-item:hover{
+  .task-item:hover {
     border-color: #25221E;
   }
 
@@ -153,7 +177,7 @@
     transition: 0.2s ease-in-out;
   }
 
-  .delete-button:hover{
+  .delete-button:hover {
     scale: 0.95;
   }
 </style>
