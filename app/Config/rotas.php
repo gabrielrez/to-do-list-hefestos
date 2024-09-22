@@ -8,12 +8,8 @@ função anonima ou um metodo de controller. Consulte a documentação.
 use App\Controllers\TarefasController;
 use App\Controllers\UsuariosController;
 
-$rotas->get('/register', function () {
-    return view('register');
-});
-$rotas->get('/login', function () {
-    return view('login');
-});
+$rotas->get('/register', fn() => view('register'));
+$rotas->get('/login', fn() => view('login'));
 
 $rotas->post('/login', [UsuariosController::class, 'login']);
 $rotas->post('/logout', [UsuariosController::class, 'logout'])->filtro('logado');
