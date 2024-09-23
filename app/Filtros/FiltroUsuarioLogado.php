@@ -9,11 +9,7 @@ class FiltroUsuarioLogado
      */
     public function aplicar()
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        $usuario_logado = isset($_SESSION['usuario_id']);
+        $usuario_logado = sessao('usuario_id'); // alias para sessao()->pegar('usuario_id')
 
         if (!$usuario_logado) {
             return redirecionar('/login')

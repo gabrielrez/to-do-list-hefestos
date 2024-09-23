@@ -19,12 +19,9 @@ class TarefasController extends Controller
 
     public function index()
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
 
-        $tarefas = $this->tarefas_model->where(['usuario_id' => $_SESSION['usuario_id']])->todos();
-        $usuario = $this->usuario_model->primeiroOnde(['id' => $_SESSION['usuario_id']], 'id');
+        $tarefas = $this->tarefas_model->where(['usuario_id' => sessao('usuario_id')])->todos();
+        $usuario = $this->usuario_model->primeiroOnde(['id' => sessao('usuario_id')], 'id');
 
         return view('tarefas_home', [
             'tarefas' => $tarefas,
